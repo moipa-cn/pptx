@@ -109,13 +109,13 @@ func (p *PowerPoint) DeleteSlide(index int) error {
 	return nil
 }
 
-func (p *PowerPoint) ReplaceSlideString(oldString string, newString string, num int) {
+func (p *PowerPoint) ReplaceSlideContent(oldString string, newString string, num int) {
 	for k, v := range p.Slides {
 		p.Slides[k] = strings.Replace(v, oldString, newString, num)
 	}
 }
 
-func (p *PowerPoint) ReplaceNotesSlideString(oldString string, newString string, num int) {
+func (p *PowerPoint) ReplaceNotesSlideContent(oldString string, newString string, num int) {
 	for k, v := range p.NotesSlides {
 		p.NotesSlides[k] = strings.Replace(v, oldString, newString, num)
 	}

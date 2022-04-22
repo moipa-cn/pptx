@@ -5,7 +5,7 @@
 For the method of processing pptx files, refer to [https://github.com/nguyenthenguyen/docx](https://github.com/nguyenthenguyen/docx)
 
 ### About
-> The library replacing text or image in slides
+> The library replacing text or image in slides,Supported image formats are "png" "jepg" "jpg",Other formats haven't been tested yet. Maybe they can
 
 > delete password only document edit password
 
@@ -28,9 +28,10 @@ func main() {
 	p,_:=pptx.ReadPowerPoint("./test.pptx")
 	img := "./test.jpg"
 	p.DeletePassWord()
-	p.ReplaceSlideString("A Golang library", "welcome", -1)
-	p.ReplaceNotesSlideString("TEST NotesSlides", "New NotesSlide", -1)
+	p.ReplaceSlideContent("A Golang library", "welcome", -1)
+	p.ReplaceNotesSlideContent("TEST NotesSlides", "New NotesSlide", -1)
 	p.ReplaceThemeName("ThemeName", "NewThemeName", -1)
+	//This slide is not really deleted, it will be moved to the last page and empty the content
 	err := p.DeleteSlide(-1)
 	if err != nil {
 		fmt.Println(err)
