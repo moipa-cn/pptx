@@ -16,9 +16,29 @@ For the method of processing pptx files, refer to [https://github.com/nguyenthen
 
 ### Examples
 
+```
+package main
 
+import (
+	"fmt"
+	"github.com/moipa-cn/pptx"
+)
 
-
+func main() {
+	p,_:=pptx.ReadPowerPoint("./test.pptx")
+	img := "./test.jpg"
+	p.DeletePassWord()
+	p.ReplaceSlideString("A Golang library", "welcome", -1)
+	p.ReplaceNotesSlideString("TEST NotesSlides", "New NotesSlide", -1)
+	p.ReplaceThemeName("ThemeName", "NewThemeName", -1)
+	err := p.DeleteSlide(-1)
+	if err != nil {
+		fmt.Println(err)
+	}
+	p.ReplaceImage(img, 1)
+	p.WriteToFile("./test_1.pptx")
+}
+```
 
 
 ### Todo
