@@ -59,6 +59,14 @@ func ReadPowerPoint(path string) (*PowerPoint, error) {
 	return &p, nil
 }
 
+func (p *PowerPoint)GetSlidesContent() []string {
+	var slides []string
+	for _, slide := range p.Slides {
+		slides = append(slides, slide)
+	}
+	return slides
+}
+
 //只能删除文本编辑密码
 func (p *PowerPoint) DeletePassWord() {
 	reg := regexp.MustCompile("<p:modifyVerifier(.*?)/>")
