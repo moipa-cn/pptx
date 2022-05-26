@@ -85,8 +85,18 @@ func (p *PowerPoint) GetThemeCount() int {
 	return len(p.Themes)
 }
 
+func(p *PowerPoint)FindSlideString(findString string) []string{
+	var nums []string 
+	for k,v :=range p.Slides{
+		if strings.Contains(v,findString){
+			nums = append(nums, k)
+		}
+	}
+	return nums
+}
+
 func (p *PowerPoint) DeleteSlide(index int) error {
-	if index =< 0 {
+	if index <= 0 {
 		index = len(p.Slides)
 	}
 	if index > len(p.Slides) {
