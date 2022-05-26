@@ -86,7 +86,7 @@ func (p *PowerPoint) GetThemeCount() int {
 }
 
 func (p *PowerPoint) DeleteSlide(index int) error {
-	if index < 0 {
+	if index =< 0 {
 		index = len(p.Slides)
 	}
 	if index > len(p.Slides) {
