@@ -9,6 +9,7 @@ import (
 	"io/ioutil"
 	"os"
 	"regexp"
+	"strconv"
 	"strings"
 )
 
@@ -59,7 +60,7 @@ func ReadPowerPoint(path string) (*PowerPoint, error) {
 	return &p, nil
 }
 
-func (p *PowerPoint)GetSlidesContent() []string {
+func (p *PowerPoint) GetSlidesContent() []string {
 	var slides []string
 	for _, slide := range p.Slides {
 		slides = append(slides, slide)
@@ -85,11 +86,14 @@ func (p *PowerPoint) GetThemeCount() int {
 	return len(p.Themes)
 }
 
-func(p *PowerPoint)FindSlideString(findString string) []string{
-	var nums []string 
-	for k,v :=range p.Slides{
-		if strings.Contains(v,findString){
-			nums = append(nums, k)
+func (p *PowerPoint) FindSlideString(findString string) []int {
+	var nums []int
+	reg := regexp.MustCompile(`\d+`)
+	for k, v := range p.Slides {
+		if strings.Contains(v, findString) {
+			num := reg.FindString(k)
+			n, _ := strconv.Atoi(num)
+			nums = append(nums, n)
 		}
 	}
 	return nums
@@ -204,4 +208,3 @@ func readCloserToByte(stream io.Reader) []byte {
 	buf.ReadFrom(stream)
 	return buf.Bytes()
 }
-
